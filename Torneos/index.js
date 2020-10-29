@@ -22,12 +22,11 @@ var publicKEY  = fs.readFileSync('./publica.pem', 'utf8');
 
 /*conexion con la base de datos mysql*/
 var conn = mysql.createConnection({
-    host: "34.70.55.236",
+    host: "35.224.121.88",
     port: "3306",
     user: "sa",
     password: "tP1AsPJr9fnDP8Jf",
-    database: "usuarios",
-    insecureAuth : true
+    database: "torneos"
 });
 
 app.listen(port, () => {
@@ -329,7 +328,6 @@ app.get('/verllaves/:torneo',(req,res)=>{
             res.send({status:err}) 
             return
         }
-        console.log(result);
         JSONtxt = JSONtxt + '\"nombre\": "'+result[0].nombre+'",'
         JSONtxt = JSONtxt + '\"ganador\": '+result[0].ganador+","
         JSONtxt = JSONtxt + '\"llave\": '+result[0].llave+","
@@ -473,7 +471,9 @@ app.get('/iniciarpartida/:id',(req,res)=>{
 /*Ver torneos User ganados*/
 app.get('/userganados/:usuario',(req,res)=>{
     var usuario = req.params.usuario
-    var sql = "SELECT t.id, t.nombre AS nombre, t.ganadorid, t.llave, j.nombre AS nombrej FROM Torneo t, Juego j WHERE ganadorid IS NOT NULL AND j.id = t.juegoid AND ganadorid = "+usuario+";"
+    var sql = "SELECT t.id, t.nombre AS nombre, t.ganadorid, t.llave, j.nombre AS nombrej, (SELECT COUNT(*) FROM Participacion p WHERE p.torneoid = t.id AND p.usuarioid = " + usuario + ") as num " 
+            + " FROM Torneo t, Juego j " 
+            + " WHERE ganadorid IS NOT NULL AND j.id = t.juegoid HAVING num > 0;"
     
     envio = []
     conn.query(sql, function (err, result) {
