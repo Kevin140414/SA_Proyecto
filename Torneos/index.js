@@ -26,7 +26,8 @@ var conn = mysql.createConnection({
     port: "3306",
     user: "sa",
     password: "tP1AsPJr9fnDP8Jf",
-    database: "torneos"
+    database: "torneos",
+    insecureAuth : true
 });
 
 app.listen(port, () => {
