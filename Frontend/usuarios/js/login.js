@@ -41,7 +41,7 @@ function login() {
               if(json.id !== undefined) {
                   //alert("Usuario valido");
                   if(json.administrador == 1) window.location.href = 'administrador.html';
-                  else window.location.href = 'jugador.html';
+                  else window.location.href = 'jugador.html?userid='+json.id;
               }
               else alert(json.message);
             })
