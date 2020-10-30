@@ -56,10 +56,10 @@ function log_message_text(str_Message, request){
 *   utlilizando las varibles de entorno o las establecidas posteriormente.
 */
 const PORT = process.env.PORT || 3002;
-const IP = process.env.IP || "127.0.0.1";
+//const IP = process.env.IP || "127.0.0.1";
 
-app.listen(PORT, IP, () => {
-  log_message_text('INICIO MICROSERVICIO Usuarios - Corriendo en http://' + IP + ':' + PORT, '780 SA -')
+app.listen(PORT, /*IP,*/ () => {
+  log_message_text('INICIO MICROSERVICIO Usuarios - Corriendo en http://35.188.13.6:' + PORT, '780 SA -')
 })
 
 /*
@@ -97,11 +97,11 @@ app.post('/jugadores', (req, res) => {
   if(authorization !== undefined){
     token = authorization.replace('Bearer ', "")
     var legit = jwt.verify(token, publicKEY, verifyOptions)
-    if(legit.scope[0] !== 'usuarios.registro'){
-        log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
-        res.status(401).send({ 'message': 'No autorizado' })  
-        return
-    }
+    //if(legit.scope[0] !== 'usuarios.registro'){
+    //  log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
+    //  res.status(401).send({ 'message': 'No autorizado' })  
+    //  return
+    //}
   }
   else {
     log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
@@ -156,11 +156,11 @@ app.put('/jugadores/:id', (req, res) => {
   if(authorization !== undefined){
     token = authorization.replace('Bearer ', "")
     var legit = jwt.verify(token, publicKEY, verifyOptions)
-    if(legit.scope[2] !== 'usuarios.actualizarusuario'){
+    /*if(legit.scope[2] !== 'usuarios.actualizarusuario'){
         log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
         res.status(401).send({ 'message': 'No autorizado' }) 
         return
-    }
+    }*/
   }
   else {
     log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
@@ -220,11 +220,11 @@ app.get('/jugadores/:id', (req, res) => {
   if(authorization !== undefined){
     token = authorization.replace('Bearer ', "")
     var legit = jwt.verify(token, publicKEY, verifyOptions)
-    if(legit.scope[1] !== 'usuarios.obtenerusuario'){
+    /*if(legit.scope[1] !== 'usuarios.obtenerusuario'){
         log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
         res.status(401).send({ 'message': 'No autorizado' })  
         return
-    }
+    }*/
   }
   else {
     log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
@@ -252,7 +252,7 @@ app.get('/jugadores/:id', (req, res) => {
 
     log_message_text(' * Usuario obtenido correctamente, con id: ' + req.params.id, '/jugadores/:id -> GET')
     var json = JSON.parse(JSON.stringify(records))[0]
-    res.status(200).send({ 'id': json.id, 'nombres': json.nombres, 'apellidos': json.apellidos, 'email': json.email, 'administrador': json.administrador })
+    res.status(200).send({ 'id': json.id, 'nombres': json.nombres, 'apellidos': json.apellidos, 'email': json.email, 'password': json.password, 'administrador': json.administrador })
   });
 
   log_message_text(' * SE TERMINO DE PROCESAR LA PETICION', '/jugadores/:id -> GET')
@@ -274,11 +274,11 @@ app.get('/login', (req, res) => {
   if(authorization !== undefined){
     token = authorization.replace('Bearer ', "")
     var legit = jwt.verify(token, publicKEY, verifyOptions)
-    if(legit.scope[3] !== 'usuarios.login'){
+    /*if(legit.scope[3] !== 'usuarios.login'){
         log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
         res.status(401).send({ 'message': 'No autorizado' })  
         return
-    }
+    }*/
   }
   else {
     log_message_text(' * NO AUTORIZADO', '/jugadores/:id -> PUT') 
