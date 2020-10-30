@@ -11,3 +11,8 @@ services:
     image: usuarios
     ports:
       - "3002:3002"
+  webapp:
+    container_name: webapp
+    image: frontend
+    ports:
+      - "80:80"
