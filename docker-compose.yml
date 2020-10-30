@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  torneos:
+    container_name: torneos
+    image: torneos
+    ports:
+      - "3000:3000"
+  usuarios:
+    container_name: usuarios
+    image: usuarios
+    ports:
+      - "3002:3002"
