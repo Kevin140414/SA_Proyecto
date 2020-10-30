@@ -1,5 +1,5 @@
-var ENDPOINT_USER = "http://35.188.13.6:3002";
-var ENDPOINT_TORNEOS = "http://localhost:3000";
+var ENDPOINT_USER = "http://34.67.137.28:3002";
+var ENDPOINT_TORNEOS = "http://34.67.137.28:3000";
 var ENDPOINT_JUEGOS = "";
 var ENDPOINT_TOKENS = "http://35.225.47.35:5001";
 
