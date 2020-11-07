@@ -6,8 +6,18 @@ services:
     image: torneos
     ports:
       - "3000:3000"
+  usuarios:
+    container_name: usuarios
+    image: usuarios
+    ports:
+      - "3002:3002"
+  webapp:
+    container_name: webapp
+    image: frontend
+    ports:
+      - "80:80"
     environment:
-      - ENDPOINT_USER="http://34.67.137.28:30022"
+      - ENDPOINT_USER="http://34.67.137.28:3002"
       - ENDPOINT_TORNEOS="http://34.67.137.28:3000"
       - ENDPOINT_TOKENS="http://35.225.47.35:5001"
       - ENDPOINT_DADOS="http://35.225.47.35:5002"
@@ -19,13 +29,3 @@ services:
       - SECRET_DADOS="DadosSecret"
       - ID_JUEGO="Juego"
       - SECRET_JUEGOS="JuegoSecret"
-  usuarios:
-    container_name: usuarios
-    image: usuarios
-    ports:
-      - "3002:3002"
-  webapp:
-    container_name: webapp
-    image: frontend
-    ports:
-      - "80:80"
