@@ -9,6 +9,9 @@ Este servidor se encarga del manejo de usuarios. Esto incluye el inicio de sesi√
 
 
 ## Historial de versiones
+* 1.4.0
+    * Agregar escritura de archivos log.
+    * Agregar environment variables para la configuraci√≥n de los microservicios
 * 1.3.0
     * Add docker-compose.yml and Dockerfiles. 
 * 1.2.2
