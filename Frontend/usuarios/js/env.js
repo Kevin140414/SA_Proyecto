@@ -1,10 +1,10 @@
-var ENDPOINT_USER = "http://34.67.137.28:3002";
+var ENDPOINT_USER = "http://18.191.208.8:3050";
 var ENDPOINT_TORNEOS = "http://34.67.137.28:3000";
-var ENDPOINT_TOKENS = "http://35.225.47.35:5001";
+var ENDPOINT_TOKENS = "http://35.232.54.106";
 
-var ID_USER = "Usuarios";
-var SECRET_USER = "UsuariosSecret";
-var ID_TORNEOS = "Torneo";
-var SECRET_TORNEOS = "TorneoSecret";
+var ID_USER = "usuarios";
+var SECRET_USER = "usuarios-123";
+var ID_TORNEOS = "torneos";
+var SECRET_TORNEOS = "torneos-123";
 var ID_JUEGO = "Juego";
 var SECRET_JUEGOS = "JuegoSecret";
