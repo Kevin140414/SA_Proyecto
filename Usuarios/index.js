@@ -170,15 +170,13 @@ app.post("/jugadores", (req, res) => {
           JSON.parse(JSON.stringify(records)).insertId,
         "/jugadores -> POST"
       );
-      res
-        .status(200)
-        .send({
-          id: JSON.parse(JSON.stringify(records)).insertId,
-          nombres: req.body.nombres,
-          apellidos: req.body.apellidos,
-          email: req.body.email,
-          administrador: req.body.administrador,
-        });
+      res.status(200).send({
+        id: JSON.parse(JSON.stringify(records)).insertId,
+        nombres: req.body.nombres,
+        apellidos: req.body.apellidos,
+        email: req.body.email,
+        administrador: req.body.administrador,
+      });
     });
   } else {
     log_message_text(
@@ -282,15 +280,13 @@ app.put("/jugadores/:id", (req, res) => {
         " * Usuario actualizado correctamente, con id: " + req.params.id,
         "/jugadores/:id -> PUT"
       );
-      res
-        .status(200)
-        .send({
-          id: parseInt(req.params.id),
-          nombres: req.body.nombres,
-          apellidos: req.body.apellidos,
-          email: req.body.email,
-          administrador: req.body.administrador,
-        });
+      res.status(200).send({
+        id: parseInt(req.params.id),
+        nombres: req.body.nombres,
+        apellidos: req.body.apellidos,
+        email: req.body.email,
+        administrador: req.body.administrador,
+      });
     });
   } else {
     log_message_text(
@@ -364,16 +360,14 @@ app.get("/jugadores/:id", (req, res) => {
       "/jugadores/:id -> GET"
     );
     var json = JSON.parse(JSON.stringify(records))[0];
-    res
-      .status(200)
-      .send({
-        id: json.id,
-        nombres: json.nombres,
-        apellidos: json.apellidos,
-        email: json.email,
-        password: json.password,
-        administrador: json.administrador,
-      });
+    res.status(200).send({
+      id: json.id,
+      nombres: json.nombres,
+      apellidos: json.apellidos,
+      email: json.email,
+      password: json.password,
+      administrador: json.administrador,
+    });
   });
 
   log_message_text(
@@ -444,15 +438,13 @@ app.get("/login", (req, res) => {
         " * Usuario obtenido correctamente, con id: " + json.id,
         "/login -> GET"
       );
-      res
-        .status(200)
-        .send({
-          id: json.id,
-          nombres: json.nombres,
-          apellidos: json.apellidos,
-          email: json.email,
-          administrador: json.administrador,
-        });
+      res.status(200).send({
+        id: json.id,
+        nombres: json.nombres,
+        apellidos: json.apellidos,
+        email: json.email,
+        administrador: json.administrador,
+      });
     });
   } else {
     log_message_text(" * Los datos recibidos son incorrectos", "/login -> GET");

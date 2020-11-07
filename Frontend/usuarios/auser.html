@@ -1,192 +1,202 @@
 <!DOCTYPE html>
 <html lang="zxx">
-<head>
-	<title>Software Avanzado - Proyecto</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="EndGam Gaming Magazine Template">
-	<meta name="keywords" content="endGam,gGaming, magazine, html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->
-	<link href="img/favicon.ico" rel="shortcut icon"/>
+  <head>
+    <title>Software Avanzado - Proyecto</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="EndGam Gaming Magazine Template" />
+    <meta name="keywords" content="endGam,gGaming, magazine, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="shortcut icon" />
 
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i"
+      rel="stylesheet"
+    />
 
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../css/slicknav.min.css" />
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="../css/magnific-popup.css" />
+    <link rel="stylesheet" href="../css/animate.css" />
 
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="../css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="../css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="../css/slicknav.min.css"/>
-	<link rel="stylesheet" href="../css/owl.carousel.min.css"/>
-	<link rel="stylesheet" href="../css/magnific-popup.css"/>
-	<link rel="stylesheet" href="../css/animate.css"/>
+    <!-- Main Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 
-	<!-- Main Stylesheets -->
-	<link rel="stylesheet" href="../css/style.css"/>
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <script type="text/javascript">
+      function init() {
+        var rq = {
+          method: "POST",
+          redirect: "follow",
+        };
 
-	<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+        fetch(
+          ENDPOINT_TOKENS + "/token?id=" + ID_USER + "&secret=" + SECRET_USER,
+          rq
+        )
+          .then((response) => response.text())
+          .then((result) => {
+            return JSON.parse(result);
+          })
+          .then(async (result) => {
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", "Bearer " + result.jwt);
+            myHeaders.append("Content-Type", "application/json");
 
-</head>
-<body>
+            var requestOptions = {
+              method: "GET",
+              headers: myHeaders,
+              redirect: "follow",
+            };
 
-<script type="text/javascript">
+            fetch(ENDPOINT_USER + "/jugadores", requestOptions)
+              .then((response) => response.text())
+              .then((result) => {
+                var json = JSON.parse(result);
+                console.log(result);
 
-function init() {
-	var rq = {
-        method: 'POST',
-        redirect: 'follow'
-  	};
+                var body = document.getElementById("principal");
 
-  	fetch(ENDPOINT_TOKENS + "/token?id=" + ID_USER + "&secret=" + SECRET_USER, rq)
-	    .then(response => response.text())
-	    .then(result => {
-	      return JSON.parse(result);
-	    })
-	    .then(async result => {
-	      var myHeaders = new Headers();
-	      myHeaders.append("Authorization", "Bearer " + result.jwt);
-	      myHeaders.append("Content-Type", "application/json");
+                var tabla = document.createElement("table");
+                tabla.className = "w3-table-all w3-card-4";
+                var tblBody = document.createElement("tbody");
+                var hilera = document.createElement("tr");
 
-	      var requestOptions = {
-	        method: 'GET',
-	        headers: myHeaders,
-	        redirect: 'follow'
-	      };
-	      
-	      fetch(ENDPOINT_USER + "/jugadores", requestOptions)
-	        .then(response => response.text())
-	        .then(result => { 
-	          	var json = JSON.parse(result);
-	          	console.log(result);
+                var celda = document.createElement("th");
+                var textoCelda = document.createTextNode("Nombre completo");
+                celda.appendChild(textoCelda);
+                hilera.appendChild(celda);
 
-	            var body = document.getElementById("principal");
-		 
-		  		var tabla   = document.createElement("table");
-		  		tabla.className = "w3-table-all w3-card-4";
-		  		var tblBody = document.createElement("tbody");
-		  		var hilera = document.createElement("tr");
-		    		
-	    		var celda = document.createElement("th");
-				var textoCelda = document.createTextNode("Nombre completo");
-				celda.appendChild(textoCelda);
-	      		hilera.appendChild(celda);	
+                var celda = document.createElement("th");
+                var textoCelda = document.createTextNode("Correo");
+                celda.appendChild(textoCelda);
+                hilera.appendChild(celda);
 
-	      		var celda = document.createElement("th");
-				var textoCelda = document.createTextNode("Correo");
-				celda.appendChild(textoCelda);
-	      		hilera.appendChild(celda);	
+                var celda = document.createElement("th");
+                var textoCelda = document.createTextNode("Ver");
+                celda.appendChild(textoCelda);
+                hilera.appendChild(celda);
 
-	      		var celda = document.createElement("th");
-				var textoCelda = document.createTextNode("Ver");
-				celda.appendChild(textoCelda);
-	      		hilera.appendChild(celda);			      			
+                tblBody.appendChild(hilera);
 
-		    	tblBody.appendChild(hilera);
-		 
-		  		for (var i = 0; i < json.length; i++) {
-		    		var hilera = document.createElement("tr");
-		    		
-		    		var celda = document.createElement("td");
-					var textoCelda = document.createTextNode(json[i].nombres + " " + json[i].apellidos);
-					celda.appendChild(textoCelda);
-		      		hilera.appendChild(celda);	
+                for (var i = 0; i < json.length; i++) {
+                  var hilera = document.createElement("tr");
 
-		      		var celda = document.createElement("td");
-					var textoCelda = document.createTextNode(json[i].email);
-					celda.appendChild(textoCelda);
-		      		hilera.appendChild(celda);		
+                  var celda = document.createElement("td");
+                  var textoCelda = document.createTextNode(
+                    json[i].nombres + " " + json[i].apellidos
+                  );
+                  celda.appendChild(textoCelda);
+                  hilera.appendChild(celda);
 
-		      		var celda = document.createElement("td");
-		      		celda.innerHTML = '<button value="' + json[i].id + '" class="btn btn-primary"'+ ' onclick="window.location.href=\'euser.html?id='+json[i].id+'\'"><b>Ver</b></button>';
-		      		hilera.appendChild(celda);      			
+                  var celda = document.createElement("td");
+                  var textoCelda = document.createTextNode(json[i].email);
+                  celda.appendChild(textoCelda);
+                  hilera.appendChild(celda);
 
-			    	tblBody.appendChild(hilera);
-				}
-				tabla.appendChild(tblBody);
-	  			body.appendChild(tabla);
-	  			tabla.setAttribute("border", "2");
-	        })
-	        .catch(error => console.log('error', error)); 
-	    })
-	    .catch(error => console.log('error', error));
-}
+                  var celda = document.createElement("td");
+                  celda.innerHTML =
+                    '<button value="' +
+                    json[i].id +
+                    '" class="btn btn-primary"' +
+                    " onclick=\"window.location.href='euser.html?id=" +
+                    json[i].id +
+                    "'\"><b>Ver</b></button>";
+                  hilera.appendChild(celda);
 
-window.onload = function() {
-	init();
-};
+                  tblBody.appendChild(hilera);
+                }
+                tabla.appendChild(tblBody);
+                body.appendChild(tabla);
+                tabla.setAttribute("border", "2");
+              })
+              .catch((error) => console.log("error", error));
+          })
+          .catch((error) => console.log("error", error));
+      }
 
-</script>
+      window.onload = function () {
+        init();
+      };
+    </script>
 
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
 
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+    <!-- Header section -->
+    <header class="header-section">
+      <div class="header-warp">
+        <div class="header-bar-warp d-flex">
+          <a href="administrador.html" class="site-logo">
+            <img src="../img/logo.png" alt="" width="125px" />
+          </a>
+          <nav class="top-nav-area w-100">
+            <div class="user-panel">
+              <a href="../home.html">Cerrar sesión</a>
+            </div>
+            <!-- Menu -->
+            <ul class="main-menu primary-menu">
+              <li>
+                <a href="">Usuarios</a>
+                <ul class="sub-menu">
+                  <li><a href="ruser.html">Registrar usuario</a></li>
+                  <li><a href="auser.html">Administrar usuarios</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="">Juegos</a>
+                <ul class="sub-menu">
+                  <li><a href="rjuego.html">Registrar juego</a></li>
+                  <li><a href="ajuego.html">Administrar juegos</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="">Torneos</a>
+                <ul class="sub-menu">
+                  <li><a href="rtorneo.html">Registrar torneos</a></li>
+                  <li><a href="atorneo.html">Administrar torneos</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <br />
+        </div>
+      </div>
+    </header>
+    <!-- Header section end -->
 
-	<!-- Header section -->
-	<header class="header-section">
-		<div class="header-warp">
-			<div class="header-bar-warp d-flex">
-				<a href="administrador.html" class="site-logo">
-					<img src="../img/logo.png" alt="" width="125px">
-				</a>
-				<nav class="top-nav-area w-100">
-					<div class="user-panel">
-						<a href="../home.html">Cerrar sesión</a>
-					</div>
-					<!-- Menu -->
-					<ul class="main-menu primary-menu">
-						<li><a href="">Usuarios</a>
-							<ul class="sub-menu">
-								<li><a href="ruser.html">Registrar usuario</a></li>
-								<li><a href="auser.html">Administrar usuarios</a></li>
-							</ul>
-						</li>
-						<li><a href="">Juegos</a>
-							<ul class="sub-menu">
-								<li><a href="rjuego.html">Registrar juego</a></li>
-								<li><a href="ajuego.html">Administrar juegos</a></li>
-							</ul>
-						</li>
-						<li><a href="">Torneos</a>
-							<ul class="sub-menu">
-								<li><a href="rtorneo.html">Registrar torneos</a></li>
-								<li><a href="atorneo.html">Administrar torneos</a></li>
-							</ul>
-						</li>
-					</ul>
-				</nav>
-			</div>
-			<div>
-				<br>
-			</div>
-		</div>
-	</header>
-	<!-- Header section end -->
+    <!-- Hero section -->
+    <div
+      class="hero-item set-bg d-flex align-items-center justify-content-center text-center"
+      data-setbg="../img/slider-bg-1.jpg"
+    >
+      <div id="principal" class="container"></div>
+    </div>
 
+    <!-- Hero section end-->
 
-	<!-- Hero section -->
-	<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="../img/slider-bg-1.jpg">
-		<div id="principal" class="container">
-		</div>	
-	</div>
-
-	<!-- Hero section end-->
-
-	<!--====== Javascripts & Jquery ======-->
-	<script src="../js/jquery-3.2.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/jquery.slicknav.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.sticky-sidebar.min.js"></script>
-	<script src="../js/jquery.magnific-popup.min.js"></script>
-	<script src="../js/main.js"></script>
-	<script src="js/env.js"></script>
-
-
-	</body>
+    <!--====== Javascripts & Jquery ======-->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.slicknav.min.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.sticky-sidebar.min.js"></script>
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="js/env.js"></script>
+  </body>
 </html>
