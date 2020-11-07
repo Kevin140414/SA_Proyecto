@@ -222,66 +222,66 @@
                     var json = JSON.parse(result);
                     console.log(result);
 
-                      var rq2 = {
-                        method: "POST",
-                        redirect: "follow",
-                      };
+                    var rq2 = {
+                      method: "POST",
+                      redirect: "follow",
+                    };
 
-                      fetch(
-                        ENDPOINT_TOKENS +
-                          "/token?id=" +
-                          ID_JUEGO +
-                          "&secret=" +
-                          SECRET_JUEGOS,
-                        rq2
-                      )
-                        .then((response) => response.text())
-                        .then((result) => {
-                          return JSON.parse(result);
-                        })
-                        .then(async (result) => {
-                          var myHeaders2 = new Headers();
-                          myHeaders2.append(
-                            "Authorization",
-                            "Bearer " + result.jwt
-                          );
-                          myHeaders2.append("Content-Type", "application/json");
+                    fetch(
+                      ENDPOINT_TOKENS +
+                        "/token?id=" +
+                        ID_JUEGO +
+                        "&secret=" +
+                        SECRET_JUEGOS,
+                      rq2
+                    )
+                      .then((response) => response.text())
+                      .then((result) => {
+                        return JSON.parse(result);
+                      })
+                      .then(async (result) => {
+                        var myHeaders2 = new Headers();
+                        myHeaders2.append(
+                          "Authorization",
+                          "Bearer " + result.jwt
+                        );
+                        myHeaders2.append("Content-Type", "application/json");
 
-                          var raw2 = JSON.stringify({
-                            id: partida,
-                            jugadores: [j1, j2],
-                          });
+                        var raw2 = JSON.stringify({
+                          id: partida,
+                          jugadores: [j1, j2],
+                        });
 
-                          var requestOptions2 = {
-                            method: "POST",
-                            headers: myHeaders2,
-                            body: raw2,
-                            redirect: "follow",
-                          };
+                        var requestOptions2 = {
+                          method: "POST",
+                          headers: myHeaders2,
+                          body: raw2,
+                          redirect: "follow",
+                        };
 
-                          const queryString = window.location.search;
-                          const urlParams = new URLSearchParams(queryString);
-                          var nombrej = urlParams.get("nombrej");
-                          var ip = "";
-                          for (var i = 0; i < json.length; i++) {
-                            if (nombrej === json[i].nombre) {
-                              ip = json[i].ip;
-                              break;
-                            }
-						  }
-						  
-						  var action = "";
-						  if (mode == 1) action = "simular";
-						  else action = "generar";
+                        const queryString = window.location.search;
+                        const urlParams = new URLSearchParams(queryString);
+                        var nombrej = urlParams.get("nombrej");
+                        var ip = "";
+                        for (var i = 0; i < json.length; i++) {
+                          if (nombrej === json[i].nombre) {
+                            ip = json[i].ip;
+                            break;
+                          }
+                        }
 
-                          fetch(ip + "/" + action, requestOptions2)
-                            .then((response) => response.text())
-                            .then((result) => {
-                              location.reload();
-                            })
-                            .catch((error) => console.log("error", error));
-                        })
-                        .catch((error) => console.log("error", error));
+                        var action = "";
+                        if (mode == 1) action = "simular";
+                        else action = "generar";
+
+                        fetch(ip + "/" + action, requestOptions2)
+                          .then((response) => response.text())
+                          .then((result) => {
+                            location.reload();
+                          })
+                          .catch((error) => console.log("error", error));
+                      })
+                      .catch((error) => console.log("error", error));
                   })
                   .catch((error) => console.log("error", error));
               })
@@ -479,7 +479,7 @@
               var ip_juego = "";
               for (var i = 0; i < json.length; i++) {
                 if (nombrej === json[i].nombre) {
-					ip_juego = json[i].ip;
+                  ip_juego = json[i].ip;
                   break;
                 }
               }
@@ -690,7 +690,15 @@
                                         fase[z].jugador2 +
                                         ',1)"><b>Simular</b></button>'
                                       : fase[z].estado == 1
-                                      ? '<button onclick="window.location.href=\'' + ip_juego + '/juego/partida?id=' + fase[z].partida + '&j1=' + fase[z].jugador1 + '&j2=' + fase[z].jugador2 +'\'" class="btn btn-warning"><b>En proceso</b></button>'
+                                      ? "<button onclick=\"window.location.href='" +
+                                        ip_juego +
+                                        "/juego/partida?id=" +
+                                        fase[z].partida +
+                                        "&j1=" +
+                                        fase[z].jugador1 +
+                                        "&j2=" +
+                                        fase[z].jugador2 +
+                                        '\'" class="btn btn-warning"><b>En proceso</b></button>'
                                       : "<b>Terminada</b>";
                                   hilera.appendChild(celda);
 
