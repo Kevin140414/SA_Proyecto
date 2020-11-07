@@ -118,7 +118,7 @@ function init() {
         redirect: 'follow'
   	};
 
-  	fetch("http://35.225.47.35:5001/token?id=Usuarios&secret=UsuariosSecret", rq)
+	  fetch(ENDPOINT_TOKENS + "/token?id=" + ID_USER + "&secret=" + SECRET_USER, rq)
 	    .then(response => response.text())
 	    .then(result => {
 	      return JSON.parse(result);
@@ -137,7 +137,7 @@ function init() {
 	      const queryString = window.location.search;
 	      const urlParams = new URLSearchParams(queryString);
 
-	      fetch("http://35.188.13.6:3002/jugadores/"+urlParams.get('id'), requestOptions)
+	      fetch(ENDPOINT_USER + "/jugadores/"+urlParams.get('id'), requestOptions)
 	        .then(response => response.text())
 	        .then(result => { 
 	          	var json = JSON.parse(result);
