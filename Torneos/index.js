@@ -569,4 +569,12 @@ function newlog (data) {
   const fecha = now.getDate() + '/' + now.getMonth() + '/' + now.getFullYear() + ' ' + now.getHours() + ':' + now.getMinutes()
   data = '[torneos]' + fecha + '-> ' + data
   console.log(data)
+  convert(data);
+}
+
+function convert(data) {
+  fs.appendFile("log.txt", data + "\n", function (err) {
+    if (err) throw err;
+    console.log("Saved!");
+  });
 }
