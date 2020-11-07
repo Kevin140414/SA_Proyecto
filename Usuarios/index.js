@@ -11,7 +11,6 @@ const jwt = require("jsonwebtoken");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-const fs = require("fs");
 
 /*
  *   Se establecen las variables para la conexión con la base de datos
